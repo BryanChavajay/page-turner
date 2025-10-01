@@ -29,8 +29,8 @@ class Book(SQLModel, table=True):
     reading_start: datetime | None = None
     reading_end: datetime | None = None
     rating: int | None = None  # e.g., 1 to 5
-    deleted: bool = Field(default=False, index=True)
-    id_user: int = Field(foreign_key="user.id_user")
+    deleted: bool = Field(default=False)
+    id_user: int = Field(foreign_key="user.id_user", index=True, nullable=False)
 
     user: User = Relationship(back_populates="books")
     quotes: list["Quote"] = Relationship(back_populates="book")
