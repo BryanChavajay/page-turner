@@ -18,7 +18,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.core.sqlmodel_models import SQLModel  # noqa
+from app.shared.sqlmodel_models import SQLModel  # noqa
 from app.core.config import settings  # noqa
 
 target_metadata = SQLModel.metadata
