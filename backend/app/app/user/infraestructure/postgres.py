@@ -1,6 +1,6 @@
 from sqlmodel import Session, select
 
-from app.core.sqlmodel_models import User as UserModel
+from app.shared.sqlmodel_models import User as UserModel
 
 from app.app.user.port import UserRepository
 from app.app.user.domain import User
