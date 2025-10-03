@@ -6,6 +6,8 @@ from app.app.user.port import UserRepository
 from app.app.user.domain import User
 from app.app.user.dtos import UserCreate, UserUpdate
 
+from app.core.security import get_password_hash
+
 
 class SQLModelUserRepository(UserRepository):
     def __init__(self, db: Session):
@@ -27,7 +29,7 @@ class SQLModelUserRepository(UserRepository):
 
     def save(self, user: UserCreate) -> User:
         user_db = UserModel(**user.model_dump())
-        hash_password = user.password  # Todo: Hash password
+        hash_password = get_password_hash(user.password)
         user_db.password = hash_password
         self.db.add(user_db)
         self.db.commit()
