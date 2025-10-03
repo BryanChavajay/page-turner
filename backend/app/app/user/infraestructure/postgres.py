@@ -18,12 +18,12 @@ class SQLModelUserRepository(UserRepository):
     def find_by_email(self, email: str) -> User | None:
         statement = select(UserModel).where(UserModel.email == email)
         user = self.db.exec(statement).first()
-        return User.model_validate(user) if user else None
+        return User.model_validate(user, from_attributes=True) if user else None
 
     def find_by_username(self, username: str) -> User | None:
         statement = select(UserModel).where(UserModel.username == username)
         user = self.db.exec(statement).first()
-        return User.model_validate(user) if user else None
+        return User.model_validate(user, from_attributes=True) if user else None
 
     def save(self, user: UserCreate) -> User:
         user_db = UserModel(**user.model_dump())
@@ -32,7 +32,7 @@ class SQLModelUserRepository(UserRepository):
         self.db.add(user_db)
         self.db.commit()
         self.db.refresh(user_db)
-        return User.model_validate(user_db)
+        return User.model_validate(user_db, from_attributes=True)
 
     def update(self, user: UserUpdate) -> User:
         statement = select(UserModel).where(UserModel.username == user.username)
@@ -45,7 +45,7 @@ class SQLModelUserRepository(UserRepository):
         user_db.session_version = user_db.session_version + 1
         self.db.commit()
         self.db.refresh(user_db)
-        return User.model_validate(user_db)
+        return User.model_validate(user_db, from_attributes=True)
 
     def delete(self, username: str) -> bool:
         statement = select(UserModel).where(UserModel.username == username)
