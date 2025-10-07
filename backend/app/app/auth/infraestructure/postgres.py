@@ -13,7 +13,7 @@ class SQLModelAuthRepository(AuthRepository):
     def __init__(self, db: Session) -> None:
         self.db = db
 
-    def find_by_username(self, username: str, password: str) -> User | None:
+    def find_by_username(self, username: str) -> User | None:
         statement = select(UserModel).where(
             UserModel.username == username, UserModel.deleted == False  # noqa: E712
         )
@@ -22,7 +22,7 @@ class SQLModelAuthRepository(AuthRepository):
             return User.model_validate(user, from_attributes=True)
         return None
 
-    def find_by_email(self, email: str, password: str) -> User | None:
+    def find_by_email(self, email: str) -> User | None:
         statement = select(UserModel).where(
             UserModel.email == email, UserModel.deleted == False # noqa: E712
         )

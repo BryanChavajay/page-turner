@@ -13,5 +13,11 @@ class BaseRefreshToken(BaseModel):
 class CreateRefreshToken(BaseRefreshToken):
     pass
 
+
 class PublicRefreshToken(BaseRefreshToken):
     is_revoked: bool
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
