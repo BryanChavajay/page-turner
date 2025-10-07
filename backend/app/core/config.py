@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     # 7 days
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+    ALGORITHM: str = "HS256"
     FRONTEND_HOST: str = "http://localhost:5173"
     ENVIRONMENT: Literal["local", "production"] = "local"
 
