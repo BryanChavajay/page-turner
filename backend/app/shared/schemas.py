@@ -8,3 +8,4 @@ class TokenPayload(BaseModel):
 
 class RefreshTokenPayload(BaseModel):
     sub: str
+    sv: int
