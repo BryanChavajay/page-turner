@@ -32,7 +32,9 @@ class AuthService:
         refresh_token_expires = timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
 
         token_payload = TokenPayload(sub=user.username, sv=user.session_version)
-        refresh_payload = RefreshTokenPayload(sub=user.username)
+        refresh_payload = RefreshTokenPayload(
+            sub=user.username, sv=user.session_version
+        )
 
         access_token = create_access_token(
             data=token_payload.model_dump(), expires_delta=access_token_expires
@@ -54,7 +56,9 @@ class AuthService:
         refresh_token_expires = timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
 
         token_payload = TokenPayload(sub=user.username, sv=user.session_version)
-        refresh_payload = RefreshTokenPayload(sub=user.username)
+        refresh_payload = RefreshTokenPayload(
+            sub=user.username, sv=user.session_version
+        )
 
         access_token = create_access_token(
             data=token_payload.model_dump(), expires_delta=access_token_expires
