@@ -39,15 +39,24 @@ class UserService:
     def update_user(
         self,
         user: UserUpdate,
+        actual_username: str,
     ) -> User:
-        exist_username = self.user_repository.find_by_username(user.username)
-        exist_email = self.user_repository.find_by_email(user.email)
+        exist_username = (
+            user.username
+            if user.username is None
+            else self.user_repository.find_by_username(user.username)
+        )
+        exist_email = (
+            user.email
+            if user.email is None
+            else self.user_repository.find_by_email(user.email)
+        )
         if exist_username or exist_email:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Username or email already registered",
             )
-        updated_user = self.user_repository.update(user)
+        updated_user = self.user_repository.update(user, actual_username)
         return updated_user
 
     def delete_user(self, username: str) -> bool:

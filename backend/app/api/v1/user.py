@@ -29,3 +29,19 @@ def register_user(user: UserCreate, service: ServiceDep) -> Any:
 def get_my_user(current_user: CurrentUserDep, service: ServiceDep) -> Any:
     user = service.get_user_by_username(current_user.username)
     return user
+
+
+@router.put("/", response_model=PublicUser)
+def update_my_user(
+    service: ServiceDep, current_user: CurrentUserDep, user_update: UserUpdate
+):
+    new_user = service.update_user(user_update, current_user.username)
+    return new_user
+
+
+@router.delete("/", status_code=200)
+def delete_my_user(service: ServiceDep, current_user: CurrentUserDep):
+    result = service.delete_user(current_user.username)
+    if not result:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"detail": "User deleted"}

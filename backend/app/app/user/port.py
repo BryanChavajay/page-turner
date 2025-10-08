@@ -22,7 +22,7 @@ class UserRepository(ABC):
         pass
 
     @abstractmethod
-    def update(self, user: UserUpdate) -> User:
+    def update(self, user: UserUpdate, actual_username: str) -> User:
         pass
 
     @abstractmethod

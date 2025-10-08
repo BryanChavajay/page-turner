@@ -36,29 +36,25 @@ class SQLModelUserRepository(UserRepository):
         self.db.refresh(user_db)
         return User.model_validate(user_db, from_attributes=True)
 
-    def update(self, user: UserUpdate) -> User:
-        statement = select(UserModel).where(UserModel.username == user.username)
+    def update(self, user: UserUpdate, actual_username: str) -> User:
+        statement = select(UserModel).where(UserModel.username == actual_username, UserModel.deleted == False)
         user_db = self.db.exec(statement).one()
-        if not user.password:
-            hash_password: str = user_db.password
-            user_db.password = hash_password
-        user_db.email = user.email
-        user_db.username = user.username
+        user_data = user.model_dump(exclude_unset=True)
+        user_db.sqlmodel_update(user_data)
+        if user.password:
+            user_db.password = get_password_hash(user.password)
         user_db.session_version = user_db.session_version + 1
+        self.db.add(user_db)
         self.db.commit()
         self.db.refresh(user_db)
         return User.model_validate(user_db, from_attributes=True)
 
     def delete(self, username: str) -> bool:
-        statement = select(UserModel).where(UserModel.username == username)
-        user_db = self.db.exec(statement).first()
-        self.db.delete(user_db)
-        self.db.commit()
-        self.db.refresh(user_db)
-
-        statement = select(UserModel).where(UserModel.username == username)
+        statement = select(UserModel).where(UserModel.username == username, UserModel.deleted == False)
         user_db = self.db.exec(statement).first()
         if user_db is None:
-            return True
-
-        return False
+            return False
+        user_db.deleted = True
+        self.db.commit()
+        self.db.refresh(user_db)
+        return user_db.deleted

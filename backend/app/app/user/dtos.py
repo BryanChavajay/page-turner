@@ -15,4 +15,6 @@ class UserCreate(BaseUser):
 
 
 class UserUpdate(BaseUser):
+    email: EmailStr | None = Field(max_length=100, default=None)
+    username: str | None = Field(max_length=50, min_length=3, default=None) 
     password: str | None = Field(default=None, max_length=50, min_length=6)
