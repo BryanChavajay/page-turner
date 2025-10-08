@@ -19,12 +19,11 @@ class AuthService:
             user = self.auth_repository.find_by_email(username)
         else:
             user = self.auth_repository.find_by_username(username)
-
         if not user:
             raise HTTPException(
                 status.HTTP_404_NOT_FOUND, detail="Incorrect username or password"
             )
-        if verify_password(password, user.password):
+        if not verify_password(password, user.password):
             raise HTTPException(
                 status.HTTP_404_NOT_FOUND, detail="Incorrect username or password"
             )
