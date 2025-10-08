@@ -8,7 +8,7 @@ from fastapi.security import OAuth2PasswordBearer
 from app.core.db import engine
 from app.core.config import settings
 from app.shared.sqlmodel_models import User
-from app.shared.schemas import TokenPayload
+from app.shared.schemas import TokenPayload, CurrentUser
 
 
 def get_session():
@@ -26,7 +26,7 @@ reusable_oauth2 = OAuth2PasswordBearer(
 TokenDep = Annotated[str, Depends(reusable_oauth2)]
 
 
-def get_current_user(db: SessionDep, token: TokenDep) -> User:
+def get_current_user(db: SessionDep, token: TokenDep) -> CurrentUser:
     try:
         payload = jwt.decode(
             jwt=token,
@@ -54,7 +54,7 @@ def get_current_user(db: SessionDep, token: TokenDep) -> User:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, detail="Invalid session"
         )
-    return user
+    return CurrentUser.model_validate(user, from_attributes=True)
 
 
 CurrentUserDep = Annotated[User, Depends(get_current_user)]
