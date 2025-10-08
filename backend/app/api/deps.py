@@ -48,7 +48,7 @@ def get_current_user(db: SessionDep, token: TokenDep) -> CurrentUser:
 
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+            status_code=status.HTTP_403_FORBIDDEN, detail="User not found"
         )
     if user.session_version != token_data.sv:
         raise HTTPException(
