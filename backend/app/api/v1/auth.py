@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, HTTPException, status, Depends, Response
+from fastapi import APIRouter, HTTPException, status, Depends, Response, Cookie
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.app.auth.infraestructure.postgres import SQLModelAuthRepository
@@ -36,3 +36,25 @@ def get_access_token(service: ServiceDep, form_data: FormDataDep, response: Resp
     return Token(access_token=access_token)
 
 
+@router.post("/refresh_token")
+def refresh_token_from_cookie(
+    service: ServiceDep,
+    response: Response,
+    refresh_token: Annotated[str | None, Cookie()] = None,
+):
+    if not refresh_token:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Could not validate credentials",
+        )
+    access_token, new_refresh_token = service.refresh_session(refresh_token)
+
+    response.set_cookie(
+        key="refresh_token",
+        value=new_refresh_token,
+        httponly=True,
+        secure=True,
+        samesite="strict",
+    )
+
+    return Token(access_token=access_token)
