@@ -24,7 +24,7 @@ class Book(SQLModel, table=True):
     id_book: int = Field(default=None, primary_key=True, index=True)
     title: str = Field(max_length=200)
     author: str = Field(max_length=100)
-    genre: str = Field(max_length=50)
+    genre: str | None = Field(max_length=50, default=None)
     status: str = Field(max_length=20)  # e.g., 'to_read', 'reading', 'read'
     reading_start: datetime | None = None
     reading_end: datetime | None = None
