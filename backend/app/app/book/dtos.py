@@ -24,7 +24,7 @@ class BookCreate(BaseBook):
     reading_start: datetime | None = None
     reading_end: datetime | None = None
     rating: int | None = Field(ge=1, le=5, default=None)  # e.g., 1 to 5
-    id_user: int
+    id_user: int | None = Field(default=None)
 
 
 class BookDescCreate(BookDescription):
