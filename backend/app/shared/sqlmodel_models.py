@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime, time, timezone
 
 from sqlmodel import Field, SQLModel, Relationship
 
@@ -43,7 +43,9 @@ class BookDescription(SQLModel, table=True):
     id_book_description: int = Field(default=None, primary_key=True)
     id_book: int = Field(foreign_key="book.id_book", unique=True, index=True)
     markdown_content: str = Field(max_length=1024)
-    last_updated: datetime
+    last_updated: datetime = Field(
+        default_factory=lambda: datetime.now(timezone.utc)
+    )
 
     book: Book = Relationship(back_populates="description")
 
