@@ -40,7 +40,7 @@ class BookUpdate(BaseBook):
     rating: int | None = Field(ge=1, le=5, default=None)  # e.g., 1 to 5
 
 
-class BookDescUpdate(BaseModel):
+class BookDescUpdate(BookDescription):
     id_book_description: int
 
 
@@ -53,11 +53,9 @@ class PublicBook(BaseBook):
     rating: int | None = None
 
 
-class PublicBookDescription(BaseModel):
+class PublicBookDescription(BookDescription):
     id_book_description: int
-    id_book: int
-    markdown_content: str
 
 
 class PublicBookWithDescription(PublicBook):
-    description: PublicBookDescription
+    description: PublicBookDescription | None = None

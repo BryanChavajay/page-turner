@@ -38,7 +38,7 @@ def register_book_description(
     return service.create_book_description(book_desc)
 
 
-@router.get("/", response_model=list[PublicBookDescription])
+@router.get("/", response_model=list[PublicBook])
 def get_my_books(
     service: ServiceDep,
     current_user: CurrentUserDep,
