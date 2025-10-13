@@ -48,11 +48,11 @@ def get_my_books(
     return service.get_books_by_user_id(current_user.id_user, limit=li, offset=of)
 
 
-@router.get("/description/{description_id}", response_model=PublicBookDescription)
+@router.get("/description/{book_id}", response_model=PublicBookDescription)
 def get_book_description(
-    service: ServiceDep, current_uder: CurrentUserDep, description_id: int
+    service: ServiceDep, current_uder: CurrentUserDep, book_id: int
 ):
-    return service.get_book_description_by_id(description_id)
+    return service.get_book_description_by_book_id(book_id, current_uder.id_user)
 
 
 @router.get("/withdescription/{book_id}", response_model=PublicBookWithDescription)

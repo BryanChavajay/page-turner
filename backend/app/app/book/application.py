@@ -53,6 +53,17 @@ class BookService:
                 status_code=status.HTTP_404_NOT_FOUND, detail="Book not found"
             )
         return book
+    
+    def get_book_description_by_book_id(self, book_id: int, user_id: int) -> BookDescription | None:
+        book = self.repository.find_by_id(book_id)
+        if book is None or book.id_user != user_id:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Book not found"
+            )
+        description = self.repository.find_description_by_book_id(book_id)
+        if description is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Description not found")
+        return description
 
     def update_book(self, book_data: BookUpdate, user_id: int) -> Book:
         old_book = self.repository.find_by_id(book_data.id_book)
