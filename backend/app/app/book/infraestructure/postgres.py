@@ -70,6 +70,17 @@ class SQLModelBookRepository(BookRepository):
             return BookWithDescription.model_validate(book, from_attributes=True)
         return None
 
+    def find_description_by_book_id(self, book_id: int) -> BookDescription | None:
+        statement = select(BookDescriptionModel).where(
+            BookDescriptionModel.id_book == book_id
+        )
+        result = self.db.exec(statement).first()
+        return (
+            BookDescription.model_validate(result, from_attributes=True)
+            if result
+            else None
+        )
+
     def update(self, new_book: BookUpdate) -> Book:
         statement = select(BookModel).where(
             BookModel.id_book == new_book.id_book, BookModel.deleted == False

@@ -35,6 +35,10 @@ class BookRepository(ABC):
         pass
 
     @abstractmethod
+    def find_description_by_book_id(self, book_id: int) -> BookDescription | None:
+        pass
+
+    @abstractmethod
     def update(self, book: BookUpdate) -> Book:
         pass
 
