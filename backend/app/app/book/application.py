@@ -21,6 +21,12 @@ class BookService:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND, detail="Book not found"
             )
+        exist_description = self.repository.find_description_by_book_id(book_desc_data.id_book)
+        if exist_description:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Book already has a description",
+            )
         return self.repository.save_description(book_desc_data)
 
     def get_book_by_id(self, book_id: int, id_user: int) -> Book:
