@@ -17,5 +17,6 @@ class PublicQuote(BaseQuote):
 
 
 class UpdateQuote(BaseModel):
+    id_quote: int = Field(gt=0)
     quote_text: str | None = Field(default=None, max_length=128)
     page_number: int | None = None

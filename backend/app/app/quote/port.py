@@ -25,6 +25,10 @@ class QuoteRepository(ABC):
         pass
 
     @abstractmethod
+    def find_quote_ids_by_user_id(self, id_user: int) -> list[int]:
+        pass
+
+    @abstractmethod
     def update(self, quote: Quote) -> Quote:
         pass
 
