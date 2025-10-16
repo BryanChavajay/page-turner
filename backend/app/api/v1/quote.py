@@ -22,7 +22,7 @@ router = APIRouter(tags=["quotes"])
 def register_quote(
     current_user: CurrentUserDep, service: ServiceDep, quote: CreateQuote
 ):
-    return service.register_quote(quote)
+    return service.register_quote(quote, current_user.id_user)
 
 
 @router.get("/", response_model=list[PublicQuote])
@@ -35,6 +35,11 @@ def get_my_quotes(
     return service.get_quotes_by_user_id(current_user.id_user, limit, offset)
 
 
+@router.get("/random", response_model=PublicQuote)
+def get_random_quote(current_user: CurrentUserDep, service: ServiceDep):
+    return service.get_random_quote_by_user_id(current_user.id_user)
+
+
 @router.get("/book/{id_book}", response_model=list[PublicQuote])
 def get_quotes_by_book_id(
     current_user: CurrentUserDep, service: ServiceDep, id_book: int
@@ -45,11 +50,6 @@ def get_quotes_by_book_id(
 @router.get("/{id_quote}", response_model=PublicQuote)
 def get_quote_by_id(current_user: CurrentUserDep, service: ServiceDep, id_quote: int):
     return service.get_quote_by_id(id_quote)
-
-
-@router.get("/random", response_model=PublicQuote)
-def get_random_quote(current_user: CurrentUserDep, service: ServiceDep):
-    return service.get_random_quote_by_user_id(current_user.id_user)
 
 
 @router.put("/", response_model=PublicQuote)
