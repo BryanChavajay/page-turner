@@ -12,8 +12,9 @@ class QuoteService:
     def __init__(self, repository: QuoteRepository):
         self.repository = repository
 
-    def register_quote(self, quote: CreateQuote) -> Quote:
-        new_quote = Quote.model_validate(quote)
+    def register_quote(self, quote: CreateQuote, id_user: int) -> Quote:
+        new_quote = Quote.model_validate(quote.model_dump())
+        new_quote.id_user = id_user
         return self.repository.save(new_quote)
 
     def get_quote_by_id(self, id_quote: int) -> Quote:

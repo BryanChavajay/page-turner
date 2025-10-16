@@ -7,7 +7,7 @@ class BaseQuote(BaseModel):
 
 
 class CreateQuote(BaseQuote):
-    id_user: int | None = None
+    id_user: int | None = 0
     page_number: int | None = None
 
 
