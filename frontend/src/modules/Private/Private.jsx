@@ -10,7 +10,7 @@ export const Private = () => {
   return (
     <RoutesWithNotFound>
       <Route
-        path={PUBLIC_ROUTES.PRIVATE}
+        path="/"
         element={<Navigate to={PUBLIC_ROUTES.HOME} />}
       />
       <Route path={PUBLIC_ROUTES.HOME} element={<Home />} />
