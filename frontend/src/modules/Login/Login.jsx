@@ -1,15 +1,10 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import bookLogo from "../../assets/book.svg";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica de autenticación aquí
-    console.log("Username: ", username, " Password", password);
-  };
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
@@ -27,7 +22,7 @@ export const Login = () => {
           </p>
         </article>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <label
               htmlFor="username"
@@ -36,12 +31,9 @@ export const Login = () => {
               Usuario
             </label>
             <input
-              id="username"
               type="text"
               placeholder="Ingresa tu usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              {...register("username", { required: true })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
             />
           </div>
@@ -57,9 +49,7 @@ export const Login = () => {
               id="password"
               type="password"
               placeholder="Ingresa tu contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              {...register("password", { required: true })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent transition-colors"
             />
           </div>
