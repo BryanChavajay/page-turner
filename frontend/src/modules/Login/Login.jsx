@@ -8,16 +8,16 @@ export const Login = () => {
 
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-      <section className="w-full max-w-sm bg-amber-50 rounded-lg shadow-md border border-gray-200 p-8">
-        <article className="flex justify-center mb-4">
+      <section className="w-full max-w-sm bg-card rounded-lg shadow-md border border-gray-200 p-8">
+        <article className="flex justify-center mb-4 text-primary">
           <img src={bookLogo} alt="Book Logo" className="w-20 h-20" />
         </article>
 
         <article className="text-center mb-8">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2 ">
             Iniciar Sesión
           </h1>
-          <p className="text-base text-gray-600">
+          <p className="text-base text-muted-foreground">
             Ingresa tus credenciales para continuar
           </p>
         </article>
@@ -26,7 +26,7 @@ export const Login = () => {
           <div className="space-y-2">
             <label
               htmlFor="username"
-              className="block text-base font-medium text-gray-700"
+              className="block text-lg font-medium text-gray-700"
             >
               Usuario
             </label>
@@ -41,7 +41,7 @@ export const Login = () => {
           <div className="space-y-2">
             <label
               htmlFor="password"
-              className="block text-base font-medium text-gray-700"
+              className="block text-lg font-medium text-gray-700"
             >
               Contraseña
             </label>
@@ -56,7 +56,7 @@ export const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-secondary hover:bg-tertiary text-gray-600 hover:text-gray-300 font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2"
+            className="w-full bg-primary hover:bg-secondary text-gray-200 hover:text-gray-600 text-lg font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2"
           >
             Ingresar
           </button>

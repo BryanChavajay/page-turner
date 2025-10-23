@@ -1,6 +1,6 @@
 export const Background = ({ children }) => {
   return (
-    <div className="min-h-screen w-full bg-primary relative text-gray-800">
+    <div className="min-h-screen w-full bg-background dark:bg-background relative text-gray-800">
       {/* Concentric Squares - Light Pattern */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
