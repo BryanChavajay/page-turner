@@ -1,9 +1,9 @@
 export const PUBLIC_ROUTES = {
-  LOGIN: "/login",
+  LOGIN: "login",
 };
 
 export const PRIVATE_ROUTES = {
-  PRIVATE: "/app",
-  HOME: "/home",
-  BOOK: "/book",
+  PRIVATE: "app",
+  HOME: "home",
+  BOOK: "book",
 };
