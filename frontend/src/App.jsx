@@ -22,7 +22,7 @@ function App() {
             />
             <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
             <Route element={<AuthGuard />}>
-              <Route path={PRIVATE_ROUTES.PRIVATE} element={<Private />} />
+              <Route path={`${PRIVATE_ROUTES.PRIVATE}/*`} element={<Private />} />
             </Route>
           </RoutesWithNotFound>
         </BrowserRouter>
