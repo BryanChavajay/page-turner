@@ -1,10 +1,18 @@
 import { useForm } from "react-hook-form";
+import {useNavigate} from 'react-router-dom'
+
 import bookLogo from "../../assets/book.svg";
+import {useAuth} from '../../context/AuthContext.jsx'
 
 export const Login = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const navigate = useNavigate()
+  const {login} = useAuth()
+  const onSubmit = (data) => {
+    login(data);
+    navigate('/')
+  };
 
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
