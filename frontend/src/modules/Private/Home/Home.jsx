@@ -1,4 +1,5 @@
 import {BookList} from '@/components/BookList.jsx'
+import {BookOpen} from '@/assets/BookOpen.jsx'
 
 export const Home = () => {
   return (
@@ -9,7 +10,7 @@ export const Home = () => {
           <div className="flex items-center justify-between">
             <section className="flex items-center gap-3">
               <article className="p-2 bg-primary/10 rounded-lg">
-                <p>📖</p>
+                <BookOpen className="h-6 w-6 text-primary"/>
               </article>
               <article>
                 <h1 className="text-2xl font-bold text-foreground">
@@ -40,7 +41,6 @@ export const Home = () => {
                 Explora tu colección completa de libros registrados
               </p>
             </article>
-            <div>LISTA DE LIBROS</div>
             <BookList />
           </section>
 
