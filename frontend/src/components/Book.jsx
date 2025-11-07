@@ -1,3 +1,6 @@
+import { User } from "@/assets/User.jsx";
+import { BookOpen } from "@/assets/BookOpen.jsx";
+
 const handledStatus = (status) => {
   const statusBagde = {
     to_read: "Por leer",
@@ -25,9 +28,11 @@ export const Book = ({ id_book, status, title, author }) => {
       className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden"
     >
       <article className="h-48 bg-orange-100 flex items-center justify-center relative">
-        <p className="h-16 w-16 text-primary/30">📖</p>
+        <BookOpen className="w-16 h-16 text-primary/30" />
         <span
-          className={`inline-flex items-center justify-center rounded-md border border-border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap absolute top-3 right-3 ${handledColorStatus(status)}`}
+          className={`inline-flex items-center justify-center rounded-md border border-border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap absolute top-3 right-3 ${handledColorStatus(
+            status
+          )}`}
         >
           {handledStatus(status)}
         </span>
@@ -39,7 +44,7 @@ export const Book = ({ id_book, status, title, author }) => {
         </h3>
 
         <p className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-          <span className="h-3 w-3">👨‍💼</span>
+          <User className="h-3 w-3" />
           <span className="line-clamp-1">{author}</span>
         </p>
       </article>
