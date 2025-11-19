@@ -8,8 +8,8 @@ export const AddBook = ({ idDialog }) => {
       className="bg-background fixed top-[20%] left-[20%] lg:top-[20%] lg:left-[30%] gap-4 rounded-lg border border-border p-6 shadow-lg sm:w-[600px] lg:w-[800px]"
     >
       <article>
-        <h2 class="text-lg leading-none font-semibold">Añadir Nuevo Libro</h2>
-        <p class="text-muted-foreground text-sm">
+        <h2 className="text-lg leading-none font-semibold">Añadir Nuevo Libro</h2>
+        <p className="text-muted-foreground text-sm">
           Completa la información del libro que deseas registrar
         </p>
       </article>
@@ -44,18 +44,6 @@ export const AddBook = ({ idDialog }) => {
             className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
           >
             Genero *
-          </label>
-          <input
-            type="text"
-            className="border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30  w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm resize-none"
-          ></input>
-        </div>
-        <div className="space-y-2">
-          <label
-            htmlFor="quote"
-            className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
-          >
-            Id Libro *
           </label>
           <input
             type="text"
