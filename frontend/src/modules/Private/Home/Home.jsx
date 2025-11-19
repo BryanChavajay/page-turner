@@ -1,6 +1,7 @@
 import { BookList } from "@/components/BookList.jsx";
 import { BookOpen } from "@/assets/BookOpen.jsx";
 import { AddQuote } from "@/components/AddQuote.jsx";
+import { FinishedBookList } from "@/components/FinishedBookList.jsx";
 
 export const Home = () => {
   const idQuoteDialog = "addQuoteDialog";
@@ -12,7 +13,7 @@ export const Home = () => {
   return (
     <div className="relative z-10 min-h-screen">
       {/* HEADER */}
-      <AddQuote idDialog={idQuoteDialog}/>
+      <AddQuote idDialog={idQuoteDialog} />
       <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -65,7 +66,7 @@ export const Home = () => {
                 Libros completados recientemente
               </p>
             </article>
-            <div>LISTA DE LIBROS TERMINADOS</div>
+            <FinishedBookList />
           </section>
         </div>
       </section>
