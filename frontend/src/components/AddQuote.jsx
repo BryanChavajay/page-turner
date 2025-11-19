@@ -9,8 +9,8 @@ export const AddQuote = ({idDialog}) => {
       className="bg-background fixed top-[20%] left-[20%] lg:top-[30%] lg:left-[30%] gap-4 rounded-lg border border-border p-6 shadow-lg sm:w-[600px] lg:w-[800px]"
     >
       <article>
-        <h2 class="text-lg leading-none font-semibold">Añadir Cita</h2>
-        <p class="text-muted-foreground text-sm">
+        <h2 className="text-lg leading-none font-semibold">Añadir Cita</h2>
+        <p className="text-muted-foreground text-sm">
           Guarda una cita memorable de tus lecturas
         </p>
       </article>
