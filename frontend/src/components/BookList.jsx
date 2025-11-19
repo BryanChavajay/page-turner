@@ -68,7 +68,7 @@ export const BookList = () => {
             placeholder="Mostrar"
             className="appearance-none px-2 py-1 bg-transparent border  rounded-md h-9 border-input dark:bg-input/30 text-base shadow-xs focus:outline-none focus:border-ring focus:ring-ring/50 focus-visible:border-ring focus-visible:ring-ring/50  transition-[color,box-shadow] focus:ring-[3px]"
           >
-            <option selected value="10">
+            <option value="10">
               Ver 10
             </option>
             <option value="25">Ver 25</option>
@@ -87,6 +87,7 @@ export const BookList = () => {
         {books.map((book) => {
           return (
             <Book
+              key={book.id_book}
               id_book={book.id_book}
               status={book.status}
               title={book.title}

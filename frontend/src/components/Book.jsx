@@ -21,10 +21,9 @@ const handledColorStatus = (status) => {
   return statusBagde[status] || "bg-gray-200";
 };
 
-export const Book = ({ id_book, status, title, author }) => {
+export const Book = ({ status, title, author }) => {
   return (
     <section
-      key={id_book}
       className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden"
     >
       <article className="h-48 bg-orange-100 flex items-center justify-center relative">
