@@ -88,7 +88,7 @@ export const BookList = () => {
           return (
             <Book
               key={book.id_book}
-              id_book={book.id_book}
+              idBook={book.id_book}
               status={book.status}
               title={book.title}
               author={book.author}

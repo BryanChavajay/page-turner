@@ -1,5 +1,8 @@
 import { User } from "@/assets/User.jsx";
 import { BookOpen } from "@/assets/BookOpen.jsx";
+import { useNavigate } from 'react-router-dom'
+
+import {PRIVATE_ROUTES} from '@/utils/routes.jsx'
 
 const handledStatus = (status) => {
   const statusBagde = {
@@ -21,10 +24,19 @@ const handledColorStatus = (status) => {
   return statusBagde[status] || "bg-gray-200";
 };
 
-export const Book = ({ status, title, author }) => {
+
+export const Book = ({ idBook, status, title, author }) => {
+  const navigate = useNavigate();
+  
+  const handledBookClick = (idBook) => {
+    navigate(`/${PRIVATE_ROUTES.PRIVATE}/${PRIVATE_ROUTES.BOOK}/${idBook}`);
+  }
+
   return (
     <section
       className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border py-6 shadow-sm group cursor-pointer hover:shadow-lg transition-all duration-300 overflow-hidden"
+
+      onClick={() => handledBookClick(idBook)}
     >
       <article className="h-48 bg-orange-100 flex items-center justify-center relative">
         <BookOpen className="w-16 h-16 text-primary/30" />
