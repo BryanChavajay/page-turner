@@ -8,7 +8,7 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./utils/routes.jsx";
 import { Background } from "./core/Background.jsx";
 
 import { Login } from "./modules/Login/Login.jsx";
-const Private = lazy(() => import("./modules/private/private.jsx"));
+const Private = lazy(() => import("./modules/Private/Private.jsx"));
 
 function App() {
   return (
