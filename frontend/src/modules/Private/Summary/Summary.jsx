@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 
 import { BookOpen } from "@/assets/BookOpen.jsx";
 import { User } from "@/assets/User.jsx";
@@ -28,10 +29,18 @@ const handledColorStatus = (status) => {
 export const Summary = () => {
   const { id } = useParams();
   const [tab, setTab] = useState("summary");
+  const [content, setContent] = useState("# Mi primer titulo");
+  const [isEdit, setIsEdit] = useState(false);
+  const prevContent = content;
 
   const handleTabClick = () => {
     tab == "summary" ? setTab("quote") : setTab("summary");
   };
+
+  const handleCancelEdit = () => {
+    setContent(prevContent);
+    setIsEdit(false);
+  }
 
   return (
     <div className="relative z-10 min-h-screen">
@@ -83,10 +92,10 @@ export const Summary = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <section className="w-full grid grid-cols-2 bg-muted px-1 py-2 rounded-xl border border-border mb-4">
+            <section className="w-full grid grid-cols-2 bg-secondary px-1 py-2 rounded-xl border border-border shadow-sm mb-6">
               <button
                 className={`rounded-md py-1 font-medium  cursor-pointer ${
-                  tab == "summary" ? "bg-gray-100 shadow" : ""
+                  tab == "summary" ? "bg-background shadow" : ""
                 }`}
                 onClick={() => handleTabClick()}
               >
@@ -94,7 +103,7 @@ export const Summary = () => {
               </button>
               <button
                 className={`rounded-md py-1 font-medium  cursor-pointer ${
-                  tab == "quote" ? "bg-gray-100" : ""
+                  tab == "quote" ? "bg-background shadow" : ""
                 }`}
                 onClick={() => handleTabClick()}
               >
@@ -102,7 +111,53 @@ export const Summary = () => {
               </button>
             </section>
 
-            {tab == "summary" ? <p>Summary</p> : <p>Quote</p>}
+            {tab == "summary" ? (
+              <section className="bg-secondary h-[800px] p-4 rounded-xl border border-border shadow-sm overflow-y-auto">
+                <div className="flex flex-row-reverse gap-2 mb-6">
+                  {isEdit ? (
+                    <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground hover:bg-primary/90 h-8 rounded-md px-3 has-[>svg]:px-2.5 gap-2">
+                      Guardar
+                    </button>
+                  ) : (
+                    <button
+                      className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border border-border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[>svg]:px-2.5 gap-2"
+                      onClick={() => setIsEdit(true)}
+                    >
+                      Editar
+                    </button>
+                  )}
+                  {isEdit && (
+                    <button
+                      className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border border-border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[>svg]:px-2.5 gap-2"
+                      onClick={handleCancelEdit}
+                    >
+                      Cancelar
+                    </button>
+                  )}
+                </div>
+                {isEdit ? (
+                  <MDEditor
+                    value={content}
+                    onChange={setContent}
+                    height={700}
+                    style={{ backgroundColor: "var(--card)" }}
+                    data-color-mode="light"
+                    preview="edit"
+                  />
+                ) : (
+                  <MDEditor.Markdown
+                    source={content}
+                    style={{
+                      backgroundColor: "var(--color-background)",
+                      color: "var(--color-secondary-foreground)",
+                    }}
+                    className="rounded-xl p-2 min-h-[700px]"
+                  />
+                )}
+              </section>
+            ) : (
+              <p>Quote</p>
+            )}
           </div>
         </div>
       </main>
